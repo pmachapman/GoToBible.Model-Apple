@@ -10,6 +10,10 @@ import XCTest
 
 final class SwiftExtensionsTests: XCTestCase {
     
+    func testEscapeDataString() {
+        XCTAssertEqual("/1 John.1_3~6-7".escapeDataString, "%2F1%20John.1_3~6-7")
+    }
+    
     func testIsBlank_Empty() {
         XCTAssertTrue("".isBlank)
     }

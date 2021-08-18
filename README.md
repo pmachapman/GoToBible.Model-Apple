@@ -11,7 +11,6 @@ The following classes are unique to the Swift implementation of GotoBible.Model:
 
 ## Not Implemented
 The following classes are found in the C# implementation, but are not currently implemented in Swift:
-* `ExtensionMethods` class
 * `IProvider` interface
 * `IRenderer` interface
 * `LanguageComparer` class
