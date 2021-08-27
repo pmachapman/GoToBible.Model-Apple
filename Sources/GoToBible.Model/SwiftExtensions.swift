@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension String {
+internal extension String {
     
     /**
      * Escapes a data string for use in a URL segment.
@@ -31,7 +31,7 @@ extension String {
  *
  * See: https://stackoverflow.com/a/24144365
  */
-extension StringProtocol {
+internal extension StringProtocol {
     subscript(offset: Int) -> Character { self[index(startIndex, offsetBy: offset)] }
     subscript(range: Range<Int>) -> SubSequence {
         let startIndex = index(self.startIndex, offsetBy: range.lowerBound)

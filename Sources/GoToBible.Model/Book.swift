@@ -5,13 +5,13 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-struct Book: Codable, CustomStringConvertible {
+public struct Book: Codable, CustomStringConvertible {
     
-    var chapters: [ChapterReference] = []
+    public var chapters: [ChapterReference] = []
     
-    var description: String {
+    public var description: String {
         return self.name
     }
     
-    var name: String = ""
+    public var name: String = ""
 }

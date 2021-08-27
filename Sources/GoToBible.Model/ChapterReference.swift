@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct ChapterReference: Codable, CustomStringConvertible, Equatable {
+public struct ChapterReference: Codable, CustomStringConvertible, Equatable {
     
-    init() {
+    public init() {
         self.book = ""
         self.chapterNumber = 0
     }
     
-    init(book: String, chapter: Int) {
+    public init(book: String, chapter: Int) {
         // Special case for Psalm 151
         if book.replacingOccurrences(of: " ", with: "").lowercased() == "psalm151" {
             self.book = "Psalm"
@@ -26,7 +26,7 @@ struct ChapterReference: Codable, CustomStringConvertible, Equatable {
         }
     }
     
-    init(_ bookAndChapter: String) {
+    public init(_ bookAndChapter: String) {
         if !bookAndChapter.isBlank {
             if let lastSpaceIndex = bookAndChapter.lastIndex(of: " ") {
                 self.book = String(bookAndChapter[..<lastSpaceIndex])
@@ -45,11 +45,11 @@ struct ChapterReference: Codable, CustomStringConvertible, Equatable {
         self.chapterNumber = 0
     }
     
-    var book: String
+    public var book: String
     
-    var chapterNumber: Int
+    public var chapterNumber: Int
     
-    var description: String {
+    public var description: String {
         if self.isValid {
             return "\(self.book) \(self.chapterNumber)"
         } else {
@@ -57,7 +57,7 @@ struct ChapterReference: Codable, CustomStringConvertible, Equatable {
         }
     }
     
-    var isValid: Bool {
+    public var isValid: Bool {
         return !self.book.isBlank
     }
 }

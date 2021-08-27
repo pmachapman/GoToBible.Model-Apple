@@ -190,7 +190,7 @@ fileprivate let bookNameMap: OrderedDictionary<String, [String]> = [
     "laodiceans": ["lao", "laodiceans"],
 ]
 
-extension ChapterReference {
+public extension ChapterReference {
     /**
      * Builds a passage reference from a chapter reference.
      *
@@ -202,7 +202,7 @@ extension ChapterReference {
 }
 
 
-extension RenderColour {
+public extension RenderColour {
     
     /**
      * Renders the colour as an HTML colour string.
@@ -212,7 +212,7 @@ extension RenderColour {
     }
 }
 
-extension RenderingParameters {
+public extension RenderingParameters {
     
     /**
      * Generates a url for the Rendering Parameters.
@@ -289,7 +289,7 @@ extension RenderingParameters {
     }
 }
 
-extension String {
+public extension String {
     
     /**
      * Builds a passage reference from a string.

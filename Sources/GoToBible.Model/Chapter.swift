@@ -5,13 +5,13 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-struct Chapter: Codable {
-    var book: String = ""
-    var chapterNumber: Int = 0
-    var copyright: String = ""
-    var nextChapterReference = ChapterReference()
-    var previousChapterReference = ChapterReference()
-    var supportsItalics: Bool = false
-    var text: String = ""
-    var translation: String = ""
+public struct Chapter: Codable {
+    public var book: String = ""
+    public var chapterNumber: Int = 0
+    public var copyright: String = ""
+    public var nextChapterReference = ChapterReference()
+    public var previousChapterReference = ChapterReference()
+    public var supportsItalics: Bool = false
+    public var text: String = ""
+    public var translation: String = ""
 }

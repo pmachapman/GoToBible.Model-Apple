@@ -5,11 +5,11 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-struct RenderFont: Codable, Equatable {
-    var bold: Bool = false
-    var familyName: String = ""
-    var italic: Bool = false
-    var sizeInPoints: Float = 0.0
-    var strikeout: Bool = false
-    var underline: Bool = false
+public struct RenderFont: Codable, Equatable {
+    public var bold: Bool = false
+    public var familyName: String = ""
+    public var italic: Bool = false
+    public var sizeInPoints: Float = 0.0
+    public var strikeout: Bool = false
+    public var underline: Bool = false
 }

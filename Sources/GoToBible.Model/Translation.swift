@@ -5,19 +5,19 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-struct Translation: Codable, CustomStringConvertible {
+public struct Translation: Codable, CustomStringConvertible {
     
-    var author: String? = nil
+    public var author: String? = nil
     
-    var canBeExported: Bool = false
+    public var canBeExported: Bool = false
     
-    var code: String = ""
+    public var code: String = ""
     
-    var commentary: Bool = false
+    public var commentary: Bool = false
     
-    var copyright: String? = nil
+    public var copyright: String? = nil
     
-    var description: String {
+    public var description: String {
         if self.language == nil {
             return self.name
         } else {
@@ -25,13 +25,13 @@ struct Translation: Codable, CustomStringConvertible {
         }
     }
     
-    var dialect: String? = nil
+    public var dialect: String? = nil
     
-    var language: String? = nil
+    public var language: String? = nil
     
-    var name: String = ""
+    public var name: String = ""
     
-    var provider = ""
+    public var provider = ""
     
-    var year : Int = 0
+    public var year : Int = 0
 }
