@@ -16,5 +16,6 @@ final class RenderedPassageTests: XCTestCase {
         XCTAssertFalse(renderedPassage.nextPassage.isValid)
         XCTAssertFalse(renderedPassage.previousPassage.isValid)
         XCTAssertFalse(renderedPassage.suggestions.ignoreCaseDiacriticsAndPunctuation)
+        XCTAssertNil(renderedPassage.suggestions.navigateToChapter)
     }
 }

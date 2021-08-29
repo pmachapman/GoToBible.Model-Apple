@@ -24,7 +24,7 @@ final class RenderingParametersTests: XCTestCase {
         XCTAssertEqual(renderingParameters.passageReference, Default.passageReference)
         XCTAssertEqual(renderingParameters.primaryProvider, "")
         XCTAssertEqual(renderingParameters.primaryTranslation, "")
-        XCTAssertFalse(renderingParameters.renderItalics)
+        XCTAssertTrue(renderingParameters.renderItalics)
         XCTAssertNil(renderingParameters.secondaryProvider)
         XCTAssertNil(renderingParameters.secondaryTranslation)
     }

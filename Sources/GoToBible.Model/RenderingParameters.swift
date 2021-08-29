@@ -18,7 +18,7 @@ public struct RenderingParameters: Codable, Equatable {
     public var passageReference: PassageReference = Default.passageReference
     public var primaryProvider: String = ""
     public var primaryTranslation: String = ""
-    public var renderItalics: Bool = false
+    public var renderItalics: Bool = true
     public var secondaryProvider: String? = nil
     public var secondaryTranslation: String? = nil
 }

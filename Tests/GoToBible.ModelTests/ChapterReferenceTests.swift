@@ -51,7 +51,7 @@ final class ChapterReferenceTests: XCTestCase {
     }
     
     func testTwoParameterInvalidConstructor() {
-        let chapterReference = ChapterReference()
+        let chapterReference = ChapterReference(book: "", chapter: 0)
         XCTAssertEqual(chapterReference.book, "")
         XCTAssertEqual(chapterReference.chapterNumber, 0)
         XCTAssertEqual(chapterReference.description, "")
