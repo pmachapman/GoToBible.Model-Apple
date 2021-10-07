@@ -35,8 +35,19 @@ public struct ChapterReference: Codable, CustomStringConvertible, Equatable {
                     chapter = chapter[..<firstColonIndex]
                 }
 
-                let chapterNumber = Int(chapter) ?? 0
-                self.chapterNumber = chapterNumber
+                let chapterNumber = Int(chapter)
+                if chapterNumber != nil {
+                    self.chapterNumber = chapterNumber ?? 0
+                } else {
+                    // Handle the case for one chapter books that start with a number
+                    let bookNumber = Int(self.book)
+                    if bookNumber != nil {
+                        self.book = bookAndChapter
+                    }
+                    
+                    self.chapterNumber = 0
+                }
+                
                 return
             }
         }

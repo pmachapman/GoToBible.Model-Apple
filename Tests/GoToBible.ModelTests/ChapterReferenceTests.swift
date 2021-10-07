@@ -42,6 +42,14 @@ final class ChapterReferenceTests: XCTestCase {
         XCTAssertTrue(chapterReference.isValid)
     }
     
+    func testBookAndChapterBookStartsWithNumberMissingChapter() {
+        let chapterReference = ChapterReference("2 John")
+        XCTAssertEqual(chapterReference.book, "2 John")
+        XCTAssertEqual(chapterReference.chapterNumber, 0)
+        XCTAssertEqual(chapterReference.description, "2 John 0")
+        XCTAssertTrue(chapterReference.isValid)
+    }
+    
     func testBookAndChapterValidConstructor() {
         let chapterReference = ChapterReference("Genesis 50")
         XCTAssertEqual(chapterReference.book, "Genesis")
