@@ -21,6 +21,26 @@ final class ExtensionMethodsTests: XCTestCase {
         XCTAssertEqual("1 John 1:3,6-7,9-12".asPassageReference(), expected)
     }
     
+    func testStringAsPassageReferenceOneChapterBookNoColon() {
+        let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1", highlightedVerses: [])
+        XCTAssertEqual("2 John 1".asPassageReference(), expected)
+    }
+    
+    func testStringAsPassageReferenceOneChapterBookNoColonWithVerse() {
+        let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:1-2", highlightedVerses: [1, 2])
+        XCTAssertEqual("2 John 1-2".asPassageReference(), expected)
+    }
+    
+    func testStringAsPassageReferenceOneChapterBookNoColonWithRange() {
+        let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:2", highlightedVerses: [2])
+        XCTAssertEqual("2 John 2".asPassageReference(), expected)
+    }
+    
+    func testStringAsPassageReferenceOneChapterBookWithColon() {
+        let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:1", highlightedVerses: [1])
+        XCTAssertEqual("2 John 1:1".asPassageReference(), expected)
+    }
+    
     func testAsUrl_RenderingParametersEmpty() {
         let renderingParameters = RenderingParameters()
         XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/"))
@@ -72,6 +92,10 @@ final class ExtensionMethodsTests: XCTestCase {
     
     func testNormaliseSingleChapterReferenceWithChapterAlreadySpecified() {
         XCTAssertEqual("jude1:1".normaliseSingleChapterReference(), "jude1:1")
+    }
+    
+    func testNormaliseSingleChapterReferenceForBookBeginningWithNumber() {
+        XCTAssertEqual("2john".normaliseSingleChapterReference(), "2john")
     }
     
     func testRenderCssBlank() {

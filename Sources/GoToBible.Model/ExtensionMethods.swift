@@ -318,12 +318,23 @@ public extension String {
             
             let ranges = sanitisedPassage.getRanges()
             for range in ranges {
-                let chapter = Int(range.split(separator: ":")[0]) ?? defaultChapter
+                let chapter = Int(range.split(separator: ":").first ?? "") ?? defaultChapter
                 
                 // Set the chapter reference
                 book = book.capitalized
                 passageReference.chapterReference = ChapterReference(book: book, chapter: chapter)
-                if self.contains(":") {
+                
+                // Do not highlight the first verse of a one chapter book if there is no colon and there is not a range of verses
+                var highlightVerses = sanitisedPassage.contains(":")
+                if ranges.count == 1 && chapters.count == 1 && chapter == 1 && !self.contains(":") {
+                    // We can highlight verses other than 1 if there is no colon
+                    let verse = Int(range.split(separator: ":").last ?? "") ?? 1
+                    if verse == 1 {
+                        highlightVerses = false
+                    }
+                }
+                
+                if highlightVerses {
                     var highlightedVerses: [Int] = []
                     var verses: String = ""
                     for displayRange in ranges {
@@ -362,6 +373,11 @@ public extension String {
                                     highlightedVerses.append(j)
                                 }
                             }
+                        }
+                        
+                        // There is an optimisation bug where the highlighted verses count is not used in the for loop when a highlighted verse is removed
+                        if (i + 1) >= highlightedVerses.count {
+                            break;
                         }
                     }
                     
