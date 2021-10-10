@@ -335,22 +335,34 @@ public extension String {
                 }
                 
                 if highlightVerses {
-                    var highlightedVerses: [Int] = []
+                    var highlightedVerses: [String] = []
                     var verses: String = ""
                     for displayRange in ranges {
-                        var displayRangeVerse = Int(displayRange)
+                        var displayRangeVerse = ""
                         if displayRange == "..." {
-                            highlightedVerses.append(Int.max)
+                            // Convert ellipsis to hyphen
+                            highlightedVerses.append("-")
                             verses.append("-")
                             continue
                         } else if displayRange.contains(":") {
                             let displayRangeParts = displayRange.split(separator: ":")
                             let displayRangeChapter = Int(displayRangeParts[0])
-                            displayRangeVerse = Int(displayRangeParts.last!.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy:CharacterSet.decimalDigits.inverted).joined())
-                            if displayRangeChapter == nil || displayRangeChapter != chapter || displayRangeVerse == nil {
+                            let displayPartVerse = displayRangeParts.last?.trimmingCharacters(in: .whitespacesAndNewlines)
+                            if displayRangeChapter != nil && displayPartVerse != nil && displayRangeChapter == chapter {
+                                if let verseNumberRegex = displayPartVerse?.range(of: "[0-9]+[a-z]?", options: .regularExpression) {
+                                    displayRangeVerse = String(displayPartVerse![verseNumberRegex.lowerBound...])
+                                } else {
+                                    // No match
+                                    continue
+                                }
+                            } else {
+                                // Invalid chapter in reference
                                 continue
                             }
-                        } else if displayRangeVerse == nil {
+                        } else if let verseNumberRegex = displayRange.trimmingCharacters(in: .whitespacesAndNewlines).range(of: "[0-9]+[a-z]?", options: .regularExpression) {
+                            displayRangeVerse = String(displayRange[verseNumberRegex.lowerBound...])
+                        } else {
+                            // No match
                             continue
                         }
                         
@@ -358,32 +370,13 @@ public extension String {
                             verses.append(",")
                         }
                         
-                        highlightedVerses.append(displayRangeVerse!)
-                        verses.append(String(displayRangeVerse!))
-                    }
-                    
-                    // Fill in verses for highlighting
-                    for i in 0..<highlightedVerses.count {
-                        if highlightedVerses[i] == Int.max {
-                            highlightedVerses.remove(at: i)
-                            if i > 0 && i < highlightedVerses.count {
-                                let start = highlightedVerses[i - 1] + 1
-                                let end = highlightedVerses[i]
-                                for j in start..<end {
-                                    highlightedVerses.append(j)
-                                }
-                            }
-                        }
-                        
-                        // There is an optimisation bug where the highlighted verses count is not used in the for loop when a highlighted verse is removed
-                        if (i + 1) >= highlightedVerses.count {
-                            break;
-                        }
+                        highlightedVerses.append(displayRangeVerse)
+                        verses.append(displayRangeVerse)
                     }
                     
                     // Set the display and highlighted verses
                     passageReference.display = "\(book) \(chapter):\(verses)"
-                    passageReference.highlightedVerses = highlightedVerses.sorted()
+                    passageReference.highlightedVerses = highlightedVerses
                 } else {
                     passageReference.display = "\(book) \(chapter)"
                 }

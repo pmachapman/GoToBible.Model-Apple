@@ -17,7 +17,7 @@ final class ExtensionMethodsTests: XCTestCase {
     }
     
     func testStringAsPassageReference() {
-        let expected = PassageReference(chapterReference: ChapterReference(book: "1 John", chapter: 1), display: "1 John 1:3,6-7,9-12", highlightedVerses: [3, 6, 7, 9, 10, 11, 12])
+        let expected = PassageReference(chapterReference: ChapterReference(book: "1 John", chapter: 1), display: "1 John 1:3,6-7,9-12", highlightedVerses: ["3", "6", "-", "7", "9", "-", "12"])
         XCTAssertEqual("1 John 1:3,6-7,9-12".asPassageReference(), expected)
     }
     
@@ -27,18 +27,24 @@ final class ExtensionMethodsTests: XCTestCase {
     }
     
     func testStringAsPassageReferenceOneChapterBookNoColonWithVerse() {
-        let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:1-2", highlightedVerses: [1, 2])
+        let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:1-2", highlightedVerses: ["1", "-", "2"])
         XCTAssertEqual("2 John 1-2".asPassageReference(), expected)
     }
     
     func testStringAsPassageReferenceOneChapterBookNoColonWithRange() {
-        let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:2", highlightedVerses: [2])
+        let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:2", highlightedVerses: ["2"])
         XCTAssertEqual("2 John 2".asPassageReference(), expected)
     }
     
     func testStringAsPassageReferenceOneChapterBookWithColon() {
-        let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:1", highlightedVerses: [1])
+        let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:1", highlightedVerses: ["1"])
         XCTAssertEqual("2 John 1:1".asPassageReference(), expected)
+    }
+    
+    func testStringAsPassageReferenceWithLetters()
+    {
+        let expected = PassageReference(chapterReference: ChapterReference(book: "1 Kings", chapter: 12), display: "1 Kings 12:24b-24g,24y-25", highlightedVerses: ["24b", "-", "24g", "24y", "-", "25"])
+        XCTAssertEqual("1 Kings 12:24b-24g,24y-25".asPassageReference(), expected)
     }
     
     func testAsUrl_RenderingParametersEmpty() {

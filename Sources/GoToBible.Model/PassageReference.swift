@@ -8,7 +8,7 @@
 public struct PassageReference: Codable, Equatable {
     public var chapterReference = ChapterReference()
     public var display: String = ""
-    public var highlightedVerses: [Int] = []
+    public var highlightedVerses: [String] = []
     public var isValid: Bool {
         return self.chapterReference.isValid
     }
