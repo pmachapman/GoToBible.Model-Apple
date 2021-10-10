@@ -9,8 +9,8 @@ Please refer to [https://github.com/pmachapman/GoTo.Bible/](https://github.com/p
 The following classes are unique to the Swift implementation of GotoBible.Model:
 * `SwiftExtensions` - extensions to implement C# or Kotlin functionality not found in Swift
 
-## Not Implemented
-The following classes are found in the C# implementation, but are not currently implemented in Swift:
-* `IProvider` interface
-* `IRenderer` interface
-* `LanguageComparer` class
+## Implemented Differently
+The following classes are found in the C# implementation, but are implemented differently in Swift:
+* `IProvider` - is not implemented asynchronously, and is not disposable
+* `IRenderer` - is not implemented asynchronously, and is not disposable
+* `LanguageComparer` - is implemented as the `compareLanguage` extension for `String`
