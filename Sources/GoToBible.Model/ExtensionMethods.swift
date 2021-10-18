@@ -325,7 +325,7 @@ public extension String {
                 passageReference.chapterReference = ChapterReference(book: book, chapter: chapter)
                 
                 // Do not highlight the first verse of a one chapter book if there is no colon and there is not a range of verses
-                var highlightVerses = sanitisedPassage.contains(":")
+                var highlightVerses = sanitisedPassage.contains(":") && chapter > 0
                 if ranges.count == 1 && chapters.count == 1 && chapter == 1 && !self.contains(":") {
                     // We can highlight verses other than 1 if there is no colon
                     let verse = Int(range.split(separator: ":").last ?? "") ?? 1
@@ -554,7 +554,12 @@ public extension String {
         var semiParts = self.split(separator: ";")
         if !semiParts[0].contains(":") {
             if let range = semiParts[0].range(of: "[\\w\\s]\\d", options: .regularExpression) {
-                semiParts[0].insert(contentsOf: "1:", at: semiParts[0].index(after: range.lowerBound))
+                // A special exemption for the introduction
+                if semiParts[0][range].last == "0" {
+                    semiParts[0].insert(contentsOf: "0:", at: semiParts[0].index(after: range.lowerBound))
+                } else {
+                    semiParts[0].insert(contentsOf: "1:", at: semiParts[0].index(after: range.lowerBound))
+                }
             }
         }
         

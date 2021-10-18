@@ -21,6 +21,11 @@ final class ExtensionMethodsTests: XCTestCase {
         XCTAssertEqual("1 John 1:3,6-7,9-12".asPassageReference(), expected)
     }
     
+    func testStringAsPassageReferenceOneChapterBookIntroduction() {
+        let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 0), display: "2 John 0", highlightedVerses: [])
+        XCTAssertEqual("2 John 0".asPassageReference(), expected)
+    }
+    
     func testStringAsPassageReferenceOneChapterBookNoColon() {
         let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1", highlightedVerses: [])
         XCTAssertEqual("2 John 1".asPassageReference(), expected)
