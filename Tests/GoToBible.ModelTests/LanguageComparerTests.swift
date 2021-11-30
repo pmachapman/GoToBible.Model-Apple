@@ -12,6 +12,7 @@ final class LanguageComparerTests: XCTestCase {
     
     func testSortOrder() {
         let actual = [
+            "",
             "German",
             "Latin",
             "Aramaic",
@@ -26,6 +27,7 @@ final class LanguageComparerTests: XCTestCase {
             "Greek",
             "Hebrew",
             "Latin",
+            "",
             "Aramaic",
             "French",
             "German",

@@ -22,6 +22,8 @@ public extension String {
             return "!3-\(self)"
         case "LATIN":
             return "!4-\(self)"
+        case "":
+            return "!5"
         default:
             return self;
         }
