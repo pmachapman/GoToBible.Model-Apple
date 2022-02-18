@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import GoToBible_Model
+@testable import GoToBibleModel
 
 final class BookTests: XCTestCase {
     
