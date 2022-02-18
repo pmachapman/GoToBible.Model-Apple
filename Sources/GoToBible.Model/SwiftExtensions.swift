@@ -10,27 +10,20 @@ import Foundation
 
 internal extension String {
     
-    /**
-     * Escapes a data string for use in a URL segment.
-     */
+    /// Escapes a data string for use in a URL segment.
     var escapeDataString: String {
         let allowedCharacterSet = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "~-_."))
         return self.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet) ?? ""
     }
     
-    /**
-     * Checkes whether the string is blank or empty.
-     */
+    /// Checks whether the string is blank or empty.
     var isBlank: Bool {
         return allSatisfy({ $0.isWhitespace })
     }
 }
 
-/**
- * These subscript extensions allow for use of Ints for Indices.
- *
- * See: https://stackoverflow.com/a/24144365
- */
+/// These subscript extensions allow for use of Ints for Indices.
+/// - Remark: See: https://stackoverflow.com/a/24144365
 internal extension StringProtocol {
     subscript(offset: Int) -> Character { self[index(startIndex, offsetBy: offset)] }
     subscript(range: Range<Int>) -> SubSequence {

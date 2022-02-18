@@ -8,9 +8,7 @@
 import Collections
 import Foundation
 
-/**
- * The lengths of each chapter in each book.
- */
+/// The lengths of each chapter in each book.
 fileprivate let bookLengths: OrderedDictionary<String, [Int]> = [
     "genesis": [31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33, 38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 55, 32, 20, 31, 29, 43, 36, 30, 23, 23, 57, 38, 34, 34, 28, 34, 31, 22, 33, 26],
     "exodus": [22, 25, 22, 31, 23, 30, 25, 32, 35, 29, 10, 51, 22, 31, 27, 36, 16, 27, 25, 26, 36, 31, 33, 18, 40, 37, 21, 43, 46, 38, 18, 35, 23, 35, 35, 38, 29, 31, 43, 38],
@@ -99,9 +97,7 @@ fileprivate let bookLengths: OrderedDictionary<String, [Int]> = [
     "laodiceans": [20],
 ]
 
-/**
- * The book name map.
- */
+/// The book name map.
 fileprivate let bookNameMap: OrderedDictionary<String, [String]> = [
     "genesis": ["ge", "gn", "gen", "genesis"],
     "exodus": ["ex", "exo", "exd", "exod", "exodus"],
@@ -191,11 +187,9 @@ fileprivate let bookNameMap: OrderedDictionary<String, [String]> = [
 ]
 
 public extension ChapterReference {
-    /**
-     * Builds a passage reference from a chapter reference.
-     *
-     * - returns The passage reference
-     */
+    
+    /// Builds a `PassageReference` from a `ChapterReference`.
+    /// - Returns: The passage reference
     func asPassageReference() -> PassageReference {
         return self.description.asPassageReference()
     }
@@ -204,9 +198,8 @@ public extension ChapterReference {
 
 public extension RenderColour {
     
-    /**
-     * Renders the colour as an HTML colour string.
-     */
+    /// Converts a `RenderColour` to an HTML string.
+    /// - Returns: The HTML colour value.
     func toHtml() -> String {
         return "#" + String(format: "%02X", self.r) + String(format: "%02X", self.g) + String(format: "%02X", self.b)
     }
@@ -214,9 +207,8 @@ public extension RenderColour {
 
 public extension RenderingParameters {
     
-    /**
-     * Generates a url for the Rendering Parameters.
-     */
+    /// Generates a URL for the Rendering Parameters.
+    /// - Returns: The URL.
     func asUrl() -> URL {
         var url = "https://goto.bible/"
         let passage = self.passageReference.display.encodePassageForUrl()
@@ -232,9 +224,8 @@ public extension RenderingParameters {
         return URL(string: url)!
     }
     
-    /**
-     * Renders the CSS.
-     */
+    /// Renders the CSS.
+    /// - Returns: The CSS code.
     func renderCss() -> String {
         var css = "body{"
         css.append("background-color:\(self.backgroundColour.toHtml());")
@@ -291,11 +282,8 @@ public extension RenderingParameters {
 
 public extension String {
     
-    /**
-     * Builds a passage reference from a string.
-     *
-     *- returns The passage reference.
-     */
+    /// Builds a passage reference from a string.
+    /// - Returns: The passage reference.
     func asPassageReference(defaultChapter: Int = 1) -> PassageReference {
         
         // Declare variables
@@ -388,13 +376,9 @@ public extension String {
         return passageReference
     }
     
-    /**
-     * Decodes the passage from a URL.
-     *
-     * For example: "1.John.1_3~6-7" will be decoded to "1 John 1:3,6-7".
-     *
-     * - returns A string suitable for passing to the RenderPassage API.
-     */
+    /// Decodes the passage from a URL.
+    /// - Returns: A string suitable for passing to the `RenderPassage` API.
+    /// - Remark: For example: "1.John.1_3~6-7" will be decoded to "1 John 1:3,6-7".
     func decodePassageFromUrl() -> String {
         
         // Check input
@@ -410,13 +394,9 @@ public extension String {
             .replacingOccurrences(of: "~", with: ",")
     }
     
-    /**
-     * Encodes the passage for a URL.
-     *
-     * For example: "1 John 1:3,6-7" will be encoded as "1.John.1_3~6-7".
-     *
-     * - returns A string suitable for including in a page URL.
-     */
+    /// Encodes the passage for a URL.
+    /// - Returns: A string suitable for including in a page URL.
+    /// - Remark: For example: "1 John 1:3,6-7" will be encoded as "1.John.1_3~6-7".
     func encodePassageForUrl() -> String {
         
         // Check input
@@ -432,11 +412,9 @@ public extension String {
             .replacingOccurrences(of: ",", with: "~")
     }
     
-    /**
-     * Gets the book from a passage reference.
-     *
-     * - returns The book name.
-     */
+    /// Gets the name of the book from a passage reference string.
+    /// - Returns: The book name from the passage reference.
+    /// - Remark: The passage reference must be lower case and without spaces.
     internal func getBook() -> String {
         
         // Prepare the passage reference for the regex
@@ -461,13 +439,9 @@ public extension String {
         return ""
     }
     
-    /**
-     * Gets the verse ranges from a sanitised passage reference.
-     *
-     * The string must be lower case and without spaces.
-     *
-     * - returns The verse ranges from a sanitised passage reference.
-    */
+    /// Gets the verse ranges from a sanitised passage reference.
+    /// - Returns: The verse ranges.
+    /// - Remark: The string must be lower case and without spaces.
     internal func getRanges() -> [String] {
         
         // Validate input
@@ -521,11 +495,8 @@ public extension String {
         return ranges
     }
     
-    /**
-     * Normalises the commas in a range part.
-     *
-     * - returns The range part with the commas normalised
-     */
+    /// Normalises the commas in a range part.
+    /// - Returns: The range part with the commas normalised
     internal func normaliseCommas() -> String {
         var parts = self.split(separator: ",")
         for i in 1..<parts.count {
@@ -543,13 +514,9 @@ public extension String {
         return parts.joined(separator: ";")
     }
     
-    /**
-     * Normalises a single chapter reference.
-     *
-     * The string must be lower case and without spaces.
-     *
-     * - returns The single chapter reference normalised.
-    */
+    /// Normalises a single chapter reference.
+    /// - Returns: The single chapter reference normalised.
+    /// - Remark: The string must be lower case and without spaces.
     internal func normaliseSingleChapterReference() -> String {
         var semiParts = self.split(separator: ";")
         if !semiParts[0].contains(":") {
@@ -566,11 +533,8 @@ public extension String {
         return semiParts.joined(separator: ";")
     }
     
-    /**
-     * Sanitises the passage reference.
-     * 
-     * - returns The passage reference ready for cleaning.
-     */
+    /// Sanitises the passage reference.
+    /// - Returns: The passage reference ready for cleaning.
     internal func sanitisePassageReference() -> String {
         return self
             .replacingOccurrences(of: " ", with: "")
