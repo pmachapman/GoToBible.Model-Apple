@@ -63,6 +63,16 @@ final class ExtensionMethodsTests: XCTestCase {
         renderingParameters.primaryTranslation = "ESV"
         XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/1.John.1_3~6-7/ESV"))
     }
+
+    func testAsUrl_RenderingParametersOneTranslationInterlinearMode() {
+        var renderingParameters = RenderingParameters()
+        renderingParameters.passageReference.display = "1 John 1:3,6-7"
+        renderingParameters.primaryTranslation = "ESV"
+        renderingParameters.interlinearIgnoresCase = true
+        renderingParameters.interlinearIgnoresDiacritics = true
+        renderingParameters.interlinearIgnoresPunctuation = false
+        XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/1.John.1_3~6-7/ESV?settings=3"))
+    }
     
     func testAsUrl_RenderingParametersTwoTranslations() {
         var renderingParameters = RenderingParameters()
@@ -70,6 +80,17 @@ final class ExtensionMethodsTests: XCTestCase {
         renderingParameters.primaryTranslation = "ESV"
         renderingParameters.secondaryTranslation = "NET"
         XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/1.John.1_3~6-7/ESV/NET"))
+    }
+    
+    func testAsUrl_RenderingParametersTwoTranslationsInterlinearMode() {
+        var renderingParameters = RenderingParameters()
+        renderingParameters.passageReference.display = "1 John 1:3,6-7"
+        renderingParameters.primaryTranslation = "ESV"
+        renderingParameters.secondaryTranslation = "NET"
+        renderingParameters.interlinearIgnoresCase = true
+        renderingParameters.interlinearIgnoresDiacritics = true
+        renderingParameters.interlinearIgnoresPunctuation = true
+        XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/1.John.1_3~6-7/ESV/NET?settings=7"))
     }
     
     func testDecodePassageFromUrl() {
@@ -86,6 +107,70 @@ final class ExtensionMethodsTests: XCTestCase {
     
     func testGetBookWithBrackets() {
         XCTAssertEqual("est(greek)1:1".getBook(), "esther (greek)")
+    }
+    
+    func testGetInterlinearMode_None() {
+        var renderingParameters = RenderingParameters()
+        renderingParameters.interlinearIgnoresCase = false
+        renderingParameters.interlinearIgnoresDiacritics = false
+        renderingParameters.interlinearIgnoresPunctuation = false
+        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.none)
+    }
+    
+    func testGetInterlinearMode_IgnoreCase() {
+        var renderingParameters = RenderingParameters()
+        renderingParameters.interlinearIgnoresCase = true
+        renderingParameters.interlinearIgnoresDiacritics = false
+        renderingParameters.interlinearIgnoresPunctuation = false
+        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresCase)
+    }
+    
+    func testGetInterlinearMode_IgnoreDiacritics() {
+        var renderingParameters = RenderingParameters()
+        renderingParameters.interlinearIgnoresCase = false
+        renderingParameters.interlinearIgnoresDiacritics = true
+        renderingParameters.interlinearIgnoresPunctuation = false
+        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresDiacritics)
+    }
+    
+    func testGetInterlinearMode_IgnoreCaseAndDiacritics() {
+        var renderingParameters = RenderingParameters()
+        renderingParameters.interlinearIgnoresCase = true
+        renderingParameters.interlinearIgnoresDiacritics = true
+        renderingParameters.interlinearIgnoresPunctuation = false
+        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresCaseAndDiacritics)
+    }
+    
+    func testGetInterlinearMode_IgnorePunctuation() {
+        var renderingParameters = RenderingParameters()
+        renderingParameters.interlinearIgnoresCase = false
+        renderingParameters.interlinearIgnoresDiacritics = false
+        renderingParameters.interlinearIgnoresPunctuation = true
+        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresPunctuation)
+    }
+    
+    func testGetInterlinearMode_IgnoreCaseAndPunctuation() {
+        var renderingParameters = RenderingParameters()
+        renderingParameters.interlinearIgnoresCase = true
+        renderingParameters.interlinearIgnoresDiacritics = false
+        renderingParameters.interlinearIgnoresPunctuation = true
+        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresCaseAndPunctuation)
+    }
+    
+    func testGetInterlinearMode_IgnoreDiacriticsAndPunctuation() {
+        var renderingParameters = RenderingParameters()
+        renderingParameters.interlinearIgnoresCase = false
+        renderingParameters.interlinearIgnoresDiacritics = true
+        renderingParameters.interlinearIgnoresPunctuation = true
+        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresDiacriticsAndPunctuation)
+    }
+    
+    func testGetInterlinearMode_IgnoreCaseDiacriticsAndPunctuation() {
+        var renderingParameters = RenderingParameters()
+        renderingParameters.interlinearIgnoresCase = true
+        renderingParameters.interlinearIgnoresDiacritics = true
+        renderingParameters.interlinearIgnoresPunctuation = true
+        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresCaseDiacriticsAndPunctuation)
     }
     
     func testGetRanges() {

@@ -220,8 +220,23 @@ public extension RenderingParameters {
                 url.append("/")
                 url.append(self.secondaryTranslation!.escapeDataString)
             }
+            
+            let mode = self.getInterlinearMode()
+            if (mode != .none)
+            {
+                url.append("?settings=\(mode.rawValue)");
+            }
         }
         return URL(string: url)!
+    }
+    
+    /// Gets the interlinear mode.
+    /// - Returns: The interlinear mode.
+    func getInterlinearMode() -> InterlinearMode {
+        var result = self.interlinearIgnoresCase ? InterlinearMode.ignoresCase.rawValue : InterlinearMode.none.rawValue
+        result |= self.interlinearIgnoresDiacritics ? InterlinearMode.ignoresDiacritics.rawValue : InterlinearMode.none.rawValue
+        result |= self.interlinearIgnoresPunctuation ? InterlinearMode.ignoresPunctuation.rawValue : InterlinearMode.none.rawValue
+        return InterlinearMode(rawValue: result) ?? InterlinearMode.none
     }
     
     /// Renders the CSS.
@@ -273,6 +288,7 @@ public extension RenderingParameters {
         }
 
         css.append("sup{font-size:\(self.font.sizeInPoints * 0.75)pt;font-weight:bold}.sup{font-weight:bold}")
+        css.append(".occurrence{vertical-align:super;font-size:smaller}")
         css.append(".copyright{border-top:1px solid \(self.foregroundColour.toHtml());font-size:\(String(format: "%.2f", self.font.sizeInPoints * 0.75))pt}")
         css.append(".supsub{display:inline-flex;flex-direction:column;justify-content:space-between;vertical-align:middle;font-size:50%}")
         css.append("mark{background-color:\(self.highlightColour.toHtml())}");

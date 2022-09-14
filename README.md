@@ -11,6 +11,9 @@ The following classes are unique to the Swift implementation of GotoBible.Model:
 
 ## Implemented Differently
 The following classes are found in the C# implementation, but are implemented differently in Swift:
+* `ApparatusRenderingParameters` - does not inherit from `SpreadsheetRenderingParameters`
+* `InterlinearMode` - each enumeration combination is implemented independently
 * `IProvider` - is not implemented asynchronously, and is not disposable
 * `IRenderer` - is not implemented asynchronously, and is not disposable
 * `LanguageComparer` - is implemented as the `compareLanguage` extension for `String`
+* `SpreadsheetRenderingParameters` - does not inherit from `RenderingParameters`
