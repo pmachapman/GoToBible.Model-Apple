@@ -219,12 +219,11 @@ public extension RenderingParameters {
             if !(self.secondaryTranslation ?? "").isBlank {
                 url.append("/")
                 url.append(self.secondaryTranslation!.escapeDataString)
-            }
-            
-            let mode = self.getInterlinearMode()
-            if (mode != .none)
-            {
-                url.append("?settings=\(mode.rawValue)");
+                let mode = self.getInterlinearMode()
+                if (mode != .none)
+                {
+                    url.append("?settings=\(mode.rawValue)");
+                }
             }
         }
         return URL(string: url)!

@@ -71,7 +71,7 @@ final class ExtensionMethodsTests: XCTestCase {
         renderingParameters.interlinearIgnoresCase = true
         renderingParameters.interlinearIgnoresDiacritics = true
         renderingParameters.interlinearIgnoresPunctuation = false
-        XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/1.John.1_3~6-7/ESV?settings=3"))
+        XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/1.John.1_3~6-7/ESV"))
     }
     
     func testAsUrl_RenderingParametersTwoTranslations() {
