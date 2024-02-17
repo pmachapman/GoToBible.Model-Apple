@@ -8,6 +8,9 @@
 /// The spreadsheet rendering parameters.
 public struct SpreadsheetRenderingParameters: Codable, Equatable {
     
+    /// Phrase Omit for the omission marker
+    public static let omit = "Omit"
+    
     /// Gets or sets the background colour.
     public var backgroundColour: RenderColour = Default.backgroundColour
     
@@ -38,7 +41,7 @@ public struct SpreadsheetRenderingParameters: Codable, Equatable {
 
     /// Gets or sets the omission marker.
     /// - Remark: This should be plain text.
-    public var omissionMarker: String = "Omit"
+    public var omissionMarker: String = omit
     
     /// Gets or sets the passage reference.
     public var passageReference: PassageReference = Default.passageReference

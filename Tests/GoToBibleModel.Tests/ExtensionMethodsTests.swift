@@ -97,8 +97,16 @@ final class ExtensionMethodsTests: XCTestCase {
         XCTAssertEqual("/1.John.1_3~6-7/".decodePassageFromUrl(), "1 John 1:3,6-7")
     }
     
+    func testDecodePassageWithBracketsFromUrl() {
+        XCTAssertEqual("/Daniel.(Greek).1/".decodePassageFromUrl(), "Daniel (Greek) 1")
+    }
+    
     func testEncodePassageFromUrl() {
         XCTAssertEqual("1 John 1:3,6-7".encodePassageForUrl(), "1.John.1_3~6-7")
+    }
+    
+    func testEncodePassageWithBracketsFromUrl() {
+        XCTAssertEqual("Daniel (Greek) 1".encodePassageForUrl(), "Daniel.(Greek).1")
     }
     
     func testGetBook() {

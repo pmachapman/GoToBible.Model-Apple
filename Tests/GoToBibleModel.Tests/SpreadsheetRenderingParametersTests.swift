@@ -21,7 +21,7 @@ final class SpreadsheetRenderingParametersTests: XCTestCase {
         XCTAssertFalse(spreadsheetRenderingParameters.interlinearIgnoresDiacritics)
         XCTAssertFalse(spreadsheetRenderingParameters.interlinearIgnoresPunctuation)
         XCTAssertFalse(spreadsheetRenderingParameters.isDebug)
-        XCTAssertEqual(spreadsheetRenderingParameters.omissionMarker, "Omit")
+        XCTAssertEqual(spreadsheetRenderingParameters.omissionMarker, SpreadsheetRenderingParameters.omit)
         XCTAssertEqual(spreadsheetRenderingParameters.passageReference, Default.passageReference)
         XCTAssertEqual(spreadsheetRenderingParameters.primaryProvider, "")
         XCTAssertEqual(spreadsheetRenderingParameters.primaryTranslation, "")

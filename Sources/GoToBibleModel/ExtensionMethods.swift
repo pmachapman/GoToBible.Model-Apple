@@ -403,7 +403,7 @@ public extension String {
         
         // Strip invalid characters
         return self
-            .replacingOccurrences(of: "[^a-zA-Z0-9. _~:,-]", with: "", options: .regularExpression)
+            .replacingOccurrences(of: "[^a-zA-Z0-9(). _~:,-]", with: "", options: .regularExpression)
             .replacingOccurrences(of: ".", with: " ")
             .replacingOccurrences(of: "_", with: ":")
             .replacingOccurrences(of: "~", with: ",")
@@ -421,7 +421,7 @@ public extension String {
         
         // Strip invalid characters
         return self
-            .replacingOccurrences(of: "[^a-zA-Z0-9. _~:,-]", with: "", options: .regularExpression)
+            .replacingOccurrences(of: "[^a-zA-Z0-9(). _~:,-]", with: "", options: .regularExpression)
             .replacingOccurrences(of: " ", with: ".")
             .replacingOccurrences(of: ":", with: "_")
             .replacingOccurrences(of: ",", with: "~")

@@ -42,7 +42,7 @@ public struct ApparatusRenderingParameters: Codable, Equatable {
 
     /// Gets or sets the omission marker.
     /// - Remark: This should be HTML code or an HTML entity. You can substitute the omitted phrase with the marker %OMITTED_PHRASE% otherwise, the marker will be shown unmodified.
-    public var omissionMarker: String = "<em>Omit</em>"
+    public var omissionMarker: String = "<em>\(SpreadsheetRenderingParameters.omit)</em>"
     
     /// Gets or sets the passage reference.
     public var passageReference: PassageReference = Default.passageReference
