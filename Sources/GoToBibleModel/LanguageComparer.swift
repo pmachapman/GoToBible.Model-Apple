@@ -19,19 +19,19 @@ public extension String {
     /// Gets the custom sort value.
     /// - Returns: The custom sort value.
     private func getCustomSortValue() -> String {
-        switch self.uppercased() {
+        return switch self.uppercased() {
         case "ENGLISH":
-            return "!1-\(self)"
+            "!1-\(self)"
         case "GREEK":
-            return "!2-\(self)"
+            "!2-\(self)"
         case "HEBREW":
-            return "!3-\(self)"
+            "!3-\(self)"
         case "LATIN":
-            return "!4-\(self)"
+            "!4-\(self)"
         case "":
-            return "!5"
+            "!5"
         default:
-            return self;
+            self;
         }
     }
 }

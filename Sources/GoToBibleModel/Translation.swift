@@ -25,10 +25,10 @@ public struct Translation: Codable, CustomStringConvertible {
     
     /// Gets the translation name and language
     public var description: String {
-        if self.language == nil {
-            return self.name
+        return if self.language == nil {
+            self.name
         } else {
-            return "\(self.language!): \(self.name)"
+            "\(self.language!): \(self.name)"
         }
     }
     

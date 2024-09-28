@@ -73,10 +73,10 @@ public struct ChapterReference: Codable, CustomStringConvertible, Equatable {
     
     /// Gets the book name and chapter number.
     public var description: String {
-        if self.isValid {
-            return "\(self.book) \(self.chapterNumber)"
+        return if self.isValid {
+            "\(self.book) \(self.chapterNumber)"
         } else {
-            return ""
+            ""
         }
     }
     

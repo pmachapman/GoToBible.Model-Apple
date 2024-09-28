@@ -5,12 +5,12 @@
 //  Created by Peter Chapman on 11/10/21.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class LanguageComparerTests: XCTestCase {
+struct LanguageComparerTests {
     
-    func testSortOrder() {
+    @Test func testSortOrder() {
         let actual = [
             "",
             "German",
@@ -33,8 +33,8 @@ final class LanguageComparerTests: XCTestCase {
             "German",
             "Ugaritic",
         ]
-        XCTAssertEqual(actual.sorted(by: { (s1, s2) -> Bool in
+        #expect(actual.sorted(by: { (s1, s2) -> Bool in
             return s1.compareLanguage(s2) == .orderedAscending
-        }), expected)
+        }) == expected)
     }
 }

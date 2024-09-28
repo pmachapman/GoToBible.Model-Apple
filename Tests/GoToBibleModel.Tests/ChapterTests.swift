@@ -5,20 +5,20 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class ChapterTests: XCTestCase {
+struct ChapterTests {
     
-    func testEmpty() {
+    @Test func testEmpty() {
         let chapter = Chapter()
-        XCTAssertEqual(chapter.book, "")
-        XCTAssertEqual(chapter.chapterNumber, 0)
-        XCTAssertEqual(chapter.copyright, "")
-        XCTAssertEqual(chapter.nextChapterReference.description, "")
-        XCTAssertEqual(chapter.previousChapterReference.description, "")
-        XCTAssertFalse(chapter.supportsItalics)
-        XCTAssertEqual(chapter.text, "")
-        XCTAssertEqual(chapter.translation, "")
+        #expect(chapter.book == "")
+        #expect(chapter.chapterNumber == 0)
+        #expect(chapter.copyright == "")
+        #expect(chapter.nextChapterReference.description == "")
+        #expect(chapter.previousChapterReference.description == "")
+        #expect(!chapter.supportsItalics)
+        #expect(chapter.text == "")
+        #expect(chapter.translation == "")
     }
 }

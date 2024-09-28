@@ -5,228 +5,229 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-import XCTest
+import Foundation
+import Testing
 @testable import GoToBibleModel
 
-final class ExtensionMethodsTests: XCTestCase {
+struct ExtensionMethodsTests {
     
-    func testChapterReferenceAsPassageReference() {
+    @Test func testChapterReferenceAsPassageReference() {
         let chapterReference = ChapterReference(book: "1 John", chapter: 1)
         let expected = PassageReference(chapterReference: chapterReference, display: "1 John 1", highlightedVerses: [])
-        XCTAssertEqual(chapterReference.asPassageReference(), expected)
+        #expect(chapterReference.asPassageReference() == expected)
     }
     
-    func testStringAsPassageReference() {
+    @Test func testStringAsPassageReference() {
         let expected = PassageReference(chapterReference: ChapterReference(book: "1 John", chapter: 1), display: "1 John 1:3,6-7,9-12", highlightedVerses: ["3", "6", "-", "7", "9", "-", "12"])
-        XCTAssertEqual("1 John 1:3,6-7,9-12".asPassageReference(), expected)
+        #expect("1 John 1:3,6-7,9-12".asPassageReference() == expected)
     }
     
-    func testStringAsPassageReferenceOneChapterBookIntroduction() {
+    @Test func testStringAsPassageReferenceOneChapterBookIntroduction() {
         let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 0), display: "2 John 0", highlightedVerses: [])
-        XCTAssertEqual("2 John 0".asPassageReference(), expected)
+        #expect("2 John 0".asPassageReference() == expected)
     }
     
-    func testStringAsPassageReferenceOneChapterBookNoColon() {
+    @Test func testStringAsPassageReferenceOneChapterBookNoColon() {
         let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1", highlightedVerses: [])
-        XCTAssertEqual("2 John 1".asPassageReference(), expected)
+        #expect("2 John 1".asPassageReference() == expected)
     }
     
-    func testStringAsPassageReferenceOneChapterBookNoColonWithVerse() {
+    @Test func testStringAsPassageReferenceOneChapterBookNoColonWithVerse() {
         let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:1-2", highlightedVerses: ["1", "-", "2"])
-        XCTAssertEqual("2 John 1-2".asPassageReference(), expected)
+        #expect("2 John 1-2".asPassageReference() == expected)
     }
     
-    func testStringAsPassageReferenceOneChapterBookNoColonWithRange() {
+    @Test func testStringAsPassageReferenceOneChapterBookNoColonWithRange() {
         let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:2", highlightedVerses: ["2"])
-        XCTAssertEqual("2 John 2".asPassageReference(), expected)
+        #expect("2 John 2".asPassageReference() == expected)
     }
     
-    func testStringAsPassageReferenceOneChapterBookWithColon() {
+    @Test func testStringAsPassageReferenceOneChapterBookWithColon() {
         let expected = PassageReference(chapterReference: ChapterReference(book: "2 John", chapter: 1), display: "2 John 1:1", highlightedVerses: ["1"])
-        XCTAssertEqual("2 John 1:1".asPassageReference(), expected)
+        #expect("2 John 1:1".asPassageReference() == expected)
     }
     
-    func testStringAsPassageReferenceWithLetters()
+    @Test func testStringAsPassageReferenceWithLetters()
     {
         let expected = PassageReference(chapterReference: ChapterReference(book: "1 Kings", chapter: 12), display: "1 Kings 12:24b-24g,24y-25", highlightedVerses: ["24b", "-", "24g", "24y", "-", "25"])
-        XCTAssertEqual("1 Kings 12:24b-24g,24y-25".asPassageReference(), expected)
+        #expect("1 Kings 12:24b-24g,24y-25".asPassageReference() == expected)
     }
     
-    func testAsUrl_RenderingParametersEmpty() {
+    @Test func testAsUrl_RenderingParametersEmpty() {
         let renderingParameters = RenderingParameters()
-        XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/"))
+        #expect(renderingParameters.asUrl() == URL(string: "https://goto.bible/"))
     }
     
-    func testAsUrl_RenderingParametersOneTranslation() {
+    @Test func testAsUrl_RenderingParametersOneTranslation() {
         var renderingParameters = RenderingParameters()
         renderingParameters.passageReference.display = "1 John 1:3,6-7"
         renderingParameters.primaryTranslation = "ESV"
-        XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/1.John.1_3~6-7/ESV"))
+        #expect(renderingParameters.asUrl() == URL(string: "https://goto.bible/1.John.1_3~6-7/ESV"))
     }
 
-    func testAsUrl_RenderingParametersOneTranslationInterlinearMode() {
+    @Test func testAsUrl_RenderingParametersOneTranslationInterlinearMode() {
         var renderingParameters = RenderingParameters()
         renderingParameters.passageReference.display = "1 John 1:3,6-7"
         renderingParameters.primaryTranslation = "ESV"
         renderingParameters.interlinearIgnoresCase = true
         renderingParameters.interlinearIgnoresDiacritics = true
         renderingParameters.interlinearIgnoresPunctuation = false
-        XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/1.John.1_3~6-7/ESV"))
+        #expect(renderingParameters.asUrl() == URL(string: "https://goto.bible/1.John.1_3~6-7/ESV"))
     }
     
-    func testAsUrl_RenderingParametersTwoTranslations() {
-        var renderingParameters = RenderingParameters()
-        renderingParameters.passageReference.display = "1 John 1:3,6-7"
-        renderingParameters.primaryTranslation = "ESV"
-        renderingParameters.secondaryTranslation = "NET"
-        XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/1.John.1_3~6-7/ESV/NET"))
-    }
-    
-    func testAsUrl_RenderingParametersTwoTranslationsInterlinearMode() {
+    @Test func testAsUrl_RenderingParametersTwoTranslations() {
         var renderingParameters = RenderingParameters()
         renderingParameters.passageReference.display = "1 John 1:3,6-7"
         renderingParameters.primaryTranslation = "ESV"
         renderingParameters.secondaryTranslation = "NET"
+        #expect(renderingParameters.asUrl() == URL(string: "https://goto.bible/1.John.1_3~6-7/ESV/NET"))
+    }
+    
+    @Test func testAsUrl_RenderingParametersTwoTranslationsInterlinearMode() {
+        var renderingParameters = RenderingParameters()
+        renderingParameters.passageReference.display = "1 John 1:3,6-7"
+        renderingParameters.primaryTranslation = "ESV"
+        renderingParameters.secondaryTranslation = "NET"
         renderingParameters.interlinearIgnoresCase = true
         renderingParameters.interlinearIgnoresDiacritics = true
         renderingParameters.interlinearIgnoresPunctuation = true
-        XCTAssertEqual(renderingParameters.asUrl(), URL(string: "https://goto.bible/1.John.1_3~6-7/ESV/NET?settings=7"))
+        #expect(renderingParameters.asUrl() == URL(string: "https://goto.bible/1.John.1_3~6-7/ESV/NET?settings=7"))
     }
     
-    func testDecodePassageFromUrl() {
-        XCTAssertEqual("/1.John.1_3~6-7/".decodePassageFromUrl(), "1 John 1:3,6-7")
+    @Test func testDecodePassageFromUrl() {
+        #expect("/1.John.1_3~6-7/".decodePassageFromUrl() == "1 John 1:3,6-7")
     }
     
-    func testDecodePassageWithBracketsFromUrl() {
-        XCTAssertEqual("/Daniel.(Greek).1/".decodePassageFromUrl(), "Daniel (Greek) 1")
+    @Test func testDecodePassageWithBracketsFromUrl() {
+        #expect("/Daniel.(Greek).1/".decodePassageFromUrl() == "Daniel (Greek) 1")
     }
     
-    func testEncodePassageFromUrl() {
-        XCTAssertEqual("1 John 1:3,6-7".encodePassageForUrl(), "1.John.1_3~6-7")
+    @Test func testEncodePassageFromUrl() {
+        #expect("1 John 1:3,6-7".encodePassageForUrl() == "1.John.1_3~6-7")
     }
     
-    func testEncodePassageWithBracketsFromUrl() {
-        XCTAssertEqual("Daniel (Greek) 1".encodePassageForUrl(), "Daniel.(Greek).1")
+    @Test func testEncodePassageWithBracketsFromUrl() {
+        #expect("Daniel (Greek) 1".encodePassageForUrl() == "Daniel.(Greek).1")
     }
     
-    func testGetBook() {
-        XCTAssertEqual("1jn1:1".getBook(), "1 john")
+    @Test func testGetBook() {
+        #expect("1jn1:1".getBook() == "1 john")
     }
     
-    func testGetBookWithBrackets() {
-        XCTAssertEqual("est(greek)1:1".getBook(), "esther (greek)")
+    @Test func testGetBookWithBrackets() {
+        #expect("est(greek)1:1".getBook() == "esther (greek)")
     }
     
-    func testGetInterlinearMode_None() {
+    @Test func testGetInterlinearMode_None() {
         var renderingParameters = RenderingParameters()
         renderingParameters.interlinearIgnoresCase = false
         renderingParameters.interlinearIgnoresDiacritics = false
         renderingParameters.interlinearIgnoresPunctuation = false
-        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.none)
+        #expect(renderingParameters.getInterlinearMode() == InterlinearMode.none)
     }
     
-    func testGetInterlinearMode_IgnoreCase() {
+    @Test func testGetInterlinearMode_IgnoreCase() {
         var renderingParameters = RenderingParameters()
         renderingParameters.interlinearIgnoresCase = true
         renderingParameters.interlinearIgnoresDiacritics = false
         renderingParameters.interlinearIgnoresPunctuation = false
-        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresCase)
+        #expect(renderingParameters.getInterlinearMode() == InterlinearMode.ignoresCase)
     }
     
-    func testGetInterlinearMode_IgnoreDiacritics() {
+    @Test func testGetInterlinearMode_IgnoreDiacritics() {
         var renderingParameters = RenderingParameters()
         renderingParameters.interlinearIgnoresCase = false
         renderingParameters.interlinearIgnoresDiacritics = true
         renderingParameters.interlinearIgnoresPunctuation = false
-        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresDiacritics)
+        #expect(renderingParameters.getInterlinearMode() == InterlinearMode.ignoresDiacritics)
     }
     
-    func testGetInterlinearMode_IgnoreCaseAndDiacritics() {
+    @Test func testGetInterlinearMode_IgnoreCaseAndDiacritics() {
         var renderingParameters = RenderingParameters()
         renderingParameters.interlinearIgnoresCase = true
         renderingParameters.interlinearIgnoresDiacritics = true
         renderingParameters.interlinearIgnoresPunctuation = false
-        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresCaseAndDiacritics)
+        #expect(renderingParameters.getInterlinearMode() == InterlinearMode.ignoresCaseAndDiacritics)
     }
     
-    func testGetInterlinearMode_IgnorePunctuation() {
+    @Test func testGetInterlinearMode_IgnorePunctuation() {
         var renderingParameters = RenderingParameters()
         renderingParameters.interlinearIgnoresCase = false
         renderingParameters.interlinearIgnoresDiacritics = false
         renderingParameters.interlinearIgnoresPunctuation = true
-        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresPunctuation)
+        #expect(renderingParameters.getInterlinearMode() == InterlinearMode.ignoresPunctuation)
     }
     
-    func testGetInterlinearMode_IgnoreCaseAndPunctuation() {
+    @Test func testGetInterlinearMode_IgnoreCaseAndPunctuation() {
         var renderingParameters = RenderingParameters()
         renderingParameters.interlinearIgnoresCase = true
         renderingParameters.interlinearIgnoresDiacritics = false
         renderingParameters.interlinearIgnoresPunctuation = true
-        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresCaseAndPunctuation)
+        #expect(renderingParameters.getInterlinearMode() == InterlinearMode.ignoresCaseAndPunctuation)
     }
     
-    func testGetInterlinearMode_IgnoreDiacriticsAndPunctuation() {
+    @Test func testGetInterlinearMode_IgnoreDiacriticsAndPunctuation() {
         var renderingParameters = RenderingParameters()
         renderingParameters.interlinearIgnoresCase = false
         renderingParameters.interlinearIgnoresDiacritics = true
         renderingParameters.interlinearIgnoresPunctuation = true
-        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresDiacriticsAndPunctuation)
+        #expect(renderingParameters.getInterlinearMode() == InterlinearMode.ignoresDiacriticsAndPunctuation)
     }
     
-    func testGetInterlinearMode_IgnoreCaseDiacriticsAndPunctuation() {
+    @Test func testGetInterlinearMode_IgnoreCaseDiacriticsAndPunctuation() {
         var renderingParameters = RenderingParameters()
         renderingParameters.interlinearIgnoresCase = true
         renderingParameters.interlinearIgnoresDiacritics = true
         renderingParameters.interlinearIgnoresPunctuation = true
-        XCTAssertEqual(renderingParameters.getInterlinearMode(), InterlinearMode.ignoresCaseDiacriticsAndPunctuation)
+        #expect(renderingParameters.getInterlinearMode() == InterlinearMode.ignoresCaseDiacriticsAndPunctuation)
     }
     
-    func testGetRanges() {
+    @Test func testGetRanges() {
         let expected = ["1:1", "1:2", "...", "1:3", "1:4", "1:5", "...", "1:6"]
-        XCTAssertEqual("1john1:1,2-3,4,5-6".getRanges(), expected)
+        #expect("1john1:1,2-3,4,5-6".getRanges() == expected)
     }
     
-    func testNormaliseCommas() {
-        XCTAssertEqual("1john1:1,2-3,4,5-6".normaliseCommas(), "1john1:1;1john1:2-3;1john1:4;1john1:5-6")
+    @Test func testNormaliseCommas() {
+        #expect("1john1:1,2-3,4,5-6".normaliseCommas() == "1john1:1;1john1:2-3;1john1:4;1john1:5-6")
     }
     
-    func testNormaliseSingleChapterReference() {
-        XCTAssertEqual("jude1".normaliseSingleChapterReference(), "jude1:1")
+    @Test func testNormaliseSingleChapterReference() {
+        #expect("jude1".normaliseSingleChapterReference() == "jude1:1")
     }
     
-    func testNormaliseSingleChapterReferenceWithChapterAlreadySpecified() {
-        XCTAssertEqual("jude1:1".normaliseSingleChapterReference(), "jude1:1")
+    @Test func testNormaliseSingleChapterReferenceWithChapterAlreadySpecified() {
+        #expect("jude1:1".normaliseSingleChapterReference() == "jude1:1")
     }
     
-    func testNormaliseSingleChapterReferenceForBookBeginningWithNumber() {
-        XCTAssertEqual("2john".normaliseSingleChapterReference(), "2john")
+    @Test func testNormaliseSingleChapterReferenceForBookBeginningWithNumber() {
+        #expect("2john".normaliseSingleChapterReference() == "2john")
     }
     
-    func testRenderCssBlank() {
-        XCTAssertNotEqual(RenderingParameters().renderCss(), "")
+    @Test func testRenderCssBlank() {
+        #expect(RenderingParameters().renderCss() != "")
     }
     
-    func testSanitisePassageReference() {
-        XCTAssertEqual("1 John 1.1‐2".sanitisePassageReference(), "1john1:1-2")
+    @Test func testSanitisePassageReference() {
+        #expect("1 John 1.1‐2".sanitisePassageReference() == "1john1:1-2")
     }
     
-    func testToHtml_Black() {
-        XCTAssertEqual(RenderColour(r: 0, g: 0, b: 0).toHtml(), "#000000")
+    @Test func testToHtml_Black() {
+        #expect(RenderColour(r: 0, g: 0, b: 0).toHtml() == "#000000")
     }
     
-    func testToHtml_Blue() {
-        XCTAssertEqual(RenderColour(r: 0, g: 0, b: 255).toHtml(), "#0000FF")
+    @Test func testToHtml_Blue() {
+        #expect(RenderColour(r: 0, g: 0, b: 255).toHtml() == "#0000FF")
     }
     
-    func testToHtml_Green() {
-        XCTAssertEqual(RenderColour(r: 0, g: 255, b: 0).toHtml(), "#00FF00")
+    @Test func testToHtml_Green() {
+        #expect(RenderColour(r: 0, g: 255, b: 0).toHtml() == "#00FF00")
     }
     
-    func testToHtml_Red() {
-        XCTAssertEqual(RenderColour(r: 255, g: 0, b: 0).toHtml(), "#FF0000")
+    @Test func testToHtml_Red() {
+        #expect(RenderColour(r: 255, g: 0, b: 0).toHtml() == "#FF0000")
     }
     
-    func testToHtml_White() {
-        XCTAssertEqual(RenderColour(r: 255, g: 255, b: 255).toHtml(), "#FFFFFF")
+    @Test func testToHtml_White() {
+        #expect(RenderColour(r: 255, g: 255, b: 255).toHtml() == "#FFFFFF")
     }
 }

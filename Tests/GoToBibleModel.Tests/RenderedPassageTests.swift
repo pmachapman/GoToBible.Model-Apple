@@ -5,17 +5,17 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class RenderedPassageTests: XCTestCase {
+struct RenderedPassageTests {
     
-    func testEmpty() {
+    @Test func testEmpty() {
         let renderedPassage = RenderedPassage()
-        XCTAssertEqual(renderedPassage.content, "")
-        XCTAssertFalse(renderedPassage.nextPassage.isValid)
-        XCTAssertFalse(renderedPassage.previousPassage.isValid)
-        XCTAssertFalse(renderedPassage.suggestions.ignoreCaseDiacriticsAndPunctuation)
-        XCTAssertNil(renderedPassage.suggestions.navigateToChapter)
+        #expect(renderedPassage.content == "")
+        #expect(!renderedPassage.nextPassage.isValid)
+        #expect(!renderedPassage.previousPassage.isValid)
+        #expect(!renderedPassage.suggestions.ignoreCaseDiacriticsAndPunctuation)
+        #expect(renderedPassage.suggestions.navigateToChapter == nil)
     }
 }

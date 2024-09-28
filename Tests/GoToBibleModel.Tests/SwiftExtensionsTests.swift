@@ -5,29 +5,29 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class SwiftExtensionsTests: XCTestCase {
+struct SwiftExtensionsTests {
     
-    func testEscapeDataString() {
-        XCTAssertEqual("/1 John.1_3~6-7".escapeDataString, "%2F1%20John.1_3~6-7")
+    @Test func testEscapeDataString() {
+        #expect("/1 John.1_3~6-7".escapeDataString == "%2F1%20John.1_3~6-7")
     }
     
-    func testIsBlank_Empty() {
-        XCTAssertTrue("".isBlank)
+    @Test func testIsBlank_Empty() {
+        #expect("".isBlank)
     }
     
-    func testIsBlank_Letters() {
-        XCTAssertFalse("A".isBlank)
+    @Test func testIsBlank_Letters() {
+        #expect(!"A".isBlank)
     }
     
-    func testIsBlank_NewLines() {
-        XCTAssertTrue("""
+    @Test func testIsBlank_NewLines() {
+        #expect("""
             """.isBlank)
     }
     
-    func testIsBlank_Spaces() {
-        XCTAssertTrue("  ".isBlank)
+    @Test func testIsBlank_Spaces() {
+        #expect("  ".isBlank)
     }
 }

@@ -5,29 +5,29 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class RenderFormatTests: XCTestCase {
+struct RenderFormatTests {
     
-    func testAccordance() {
-        XCTAssertEqual(RenderFormat.accordance.rawValue, 2)
+    @Test func testAccordance() {
+        #expect(RenderFormat.accordance.rawValue == 2)
     }
     
-    func testApparatus() {
-        XCTAssertEqual(RenderFormat.apparatus.rawValue, 3)
+    @Test func testApparatus() {
+        #expect(RenderFormat.apparatus.rawValue == 3)
     }
     
-    func testHtml() {
-        XCTAssertEqual(RenderFormat.html.rawValue, 1)
+    @Test func testHtml() {
+        #expect(RenderFormat.html.rawValue == 1)
     }
     
-    func testSpreadsheet() {
-        XCTAssertEqual(RenderFormat.spreadsheet.rawValue, 4)
+    @Test func testSpreadsheet() {
+        #expect(RenderFormat.spreadsheet.rawValue == 4)
     }
     
-    func testText() {
-        XCTAssertEqual(RenderFormat.text.rawValue, 0)
+    @Test func testText() {
+        #expect(RenderFormat.text.rawValue == 0)
     }
 }
 

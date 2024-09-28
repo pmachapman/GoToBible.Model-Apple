@@ -5,14 +5,14 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class RenderingSuggestionsTests: XCTestCase {
+struct RenderingSuggestionsTests {
     
-    func testEmpty() {
+    @Test func testEmpty() {
         let renderingSuggestions = RenderingSuggestions()
-        XCTAssertFalse(renderingSuggestions.ignoreCaseDiacriticsAndPunctuation)
-        XCTAssertNil(renderingSuggestions.navigateToChapter)
+        #expect(!renderingSuggestions.ignoreCaseDiacriticsAndPunctuation)
+        #expect(renderingSuggestions.navigateToChapter == nil)
     }
 }

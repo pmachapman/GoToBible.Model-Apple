@@ -5,41 +5,41 @@
 //  Created by Peter Chapman on 14/09/22.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class InterlinearModeTests: XCTestCase {
+struct InterlinearModeTests {
     
-    func testNone() {
-        XCTAssertEqual(InterlinearMode.none.rawValue, 0)
+    @Test func testNone() {
+        #expect(InterlinearMode.none.rawValue == 0)
     }
     
-    func testIgnoresCase() {
-        XCTAssertEqual(InterlinearMode.ignoresCase.rawValue, 1)
+    @Test func testIgnoresCase() {
+        #expect(InterlinearMode.ignoresCase.rawValue == 1)
     }
     
-    func testIgnoresDiacritics() {
-        XCTAssertEqual(InterlinearMode.ignoresDiacritics.rawValue, 2)
+    @Test func testIgnoresDiacritics() {
+        #expect(InterlinearMode.ignoresDiacritics.rawValue == 2)
     }
     
-    func testIgnoresCaseAndDiacritics() {
-        XCTAssertEqual(InterlinearMode.ignoresCaseAndDiacritics.rawValue, 3)
+    @Test func testIgnoresCaseAndDiacritics() {
+        #expect(InterlinearMode.ignoresCaseAndDiacritics.rawValue == 3)
     }
     
-    func testIgnoresPunctuation() {
-        XCTAssertEqual(InterlinearMode.ignoresPunctuation.rawValue, 4)
+    @Test func testIgnoresPunctuation() {
+        #expect(InterlinearMode.ignoresPunctuation.rawValue == 4)
     }
     
-    func testIgnoresCaseAndPunctuation() {
-        XCTAssertEqual(InterlinearMode.ignoresCaseAndPunctuation.rawValue, 5)
+    @Test func testIgnoresCaseAndPunctuation() {
+        #expect(InterlinearMode.ignoresCaseAndPunctuation.rawValue == 5)
     }
     
-    func testIgnoresDiacriticsAndPunctuation() {
-        XCTAssertEqual(InterlinearMode.ignoresDiacriticsAndPunctuation.rawValue, 6)
+    @Test func testIgnoresDiacriticsAndPunctuation() {
+        #expect(InterlinearMode.ignoresDiacriticsAndPunctuation.rawValue == 6)
     }
     
-    func testIgnoresCaseDiacriticsAndPunctuation() {
-        XCTAssertEqual(InterlinearMode.ignoresCaseDiacriticsAndPunctuation.rawValue, 7)
+    @Test func testIgnoresCaseDiacriticsAndPunctuation() {
+        #expect(InterlinearMode.ignoresCaseDiacriticsAndPunctuation.rawValue == 7)
     }
 }
 

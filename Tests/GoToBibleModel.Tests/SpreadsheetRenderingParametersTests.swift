@@ -5,29 +5,29 @@
 //  Created by Peter Chapman on 14/09/22.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class SpreadsheetRenderingParametersTests: XCTestCase {
+struct SpreadsheetRenderingParametersTests {
     
-    func testEmpty() {
+    @Test func testEmpty() {
         let spreadsheetRenderingParameters = SpreadsheetRenderingParameters()
-        XCTAssertEqual(spreadsheetRenderingParameters.backgroundColour, Default.backgroundColour)
-        XCTAssertEqual(spreadsheetRenderingParameters.font, Default.font)
-        XCTAssertEqual(spreadsheetRenderingParameters.foregroundColour, Default.foregroundColour)
-        XCTAssertEqual(spreadsheetRenderingParameters.format, RenderFormat.html)
-        XCTAssertEqual(spreadsheetRenderingParameters.highlightColour, Default.highlightColour)
-        XCTAssertFalse(spreadsheetRenderingParameters.interlinearIgnoresCase)
-        XCTAssertFalse(spreadsheetRenderingParameters.interlinearIgnoresDiacritics)
-        XCTAssertFalse(spreadsheetRenderingParameters.interlinearIgnoresPunctuation)
-        XCTAssertFalse(spreadsheetRenderingParameters.isDebug)
-        XCTAssertEqual(spreadsheetRenderingParameters.omissionMarker, SpreadsheetRenderingParameters.omit)
-        XCTAssertEqual(spreadsheetRenderingParameters.passageReference, Default.passageReference)
-        XCTAssertEqual(spreadsheetRenderingParameters.primaryProvider, "")
-        XCTAssertEqual(spreadsheetRenderingParameters.primaryTranslation, "")
-        XCTAssertTrue(spreadsheetRenderingParameters.renderItalics)
-        XCTAssertFalse(spreadsheetRenderingParameters.renderNeighbourForAddition)
-        XCTAssertNil(spreadsheetRenderingParameters.secondaryProvider)
-        XCTAssertNil(spreadsheetRenderingParameters.secondaryTranslation)
+        #expect(spreadsheetRenderingParameters.backgroundColour == Default.backgroundColour)
+        #expect(spreadsheetRenderingParameters.font == Default.font)
+        #expect(spreadsheetRenderingParameters.foregroundColour == Default.foregroundColour)
+        #expect(spreadsheetRenderingParameters.format == RenderFormat.html)
+        #expect(spreadsheetRenderingParameters.highlightColour == Default.highlightColour)
+        #expect(!spreadsheetRenderingParameters.interlinearIgnoresCase)
+        #expect(!spreadsheetRenderingParameters.interlinearIgnoresDiacritics)
+        #expect(!spreadsheetRenderingParameters.interlinearIgnoresPunctuation)
+        #expect(!spreadsheetRenderingParameters.isDebug)
+        #expect(spreadsheetRenderingParameters.omissionMarker == SpreadsheetRenderingParameters.omit)
+        #expect(spreadsheetRenderingParameters.passageReference == Default.passageReference)
+        #expect(spreadsheetRenderingParameters.primaryProvider == "")
+        #expect(spreadsheetRenderingParameters.primaryTranslation == "")
+        #expect(spreadsheetRenderingParameters.renderItalics)
+        #expect(!spreadsheetRenderingParameters.renderNeighbourForAddition)
+        #expect(spreadsheetRenderingParameters.secondaryProvider == nil)
+        #expect(spreadsheetRenderingParameters.secondaryTranslation == nil)
     }
 }

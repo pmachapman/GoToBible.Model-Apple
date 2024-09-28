@@ -5,80 +5,80 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class ChapterReferenceTests: XCTestCase {
+struct ChapterReferenceTests {
     
-    func testEmptyConstructor() {
+    @Test func testEmptyConstructor() {
         let chapterReference = ChapterReference()
-        XCTAssertEqual(chapterReference.book, "")
-        XCTAssertEqual(chapterReference.chapterNumber, 0)
-        XCTAssertEqual(chapterReference.description, "")
-        XCTAssertFalse(chapterReference.isValid)
+        #expect(chapterReference.book == "")
+        #expect(chapterReference.chapterNumber == 0)
+        #expect(chapterReference.description == "")
+        #expect(!chapterReference.isValid)
     }
     
-    func testBookAndChapterInvalidConstructor() {
+    @Test func testBookAndChapterInvalidConstructor() {
         let chapterReference = ChapterReference("")
-        XCTAssertEqual(chapterReference.book, "")
-        XCTAssertEqual(chapterReference.chapterNumber, 0)
-        XCTAssertEqual(chapterReference.description, "")
-        XCTAssertFalse(chapterReference.isValid)
+        #expect(chapterReference.book == "")
+        #expect(chapterReference.chapterNumber == 0)
+        #expect(chapterReference.description == "")
+        #expect(!chapterReference.isValid)
     }
     
-    func testBookAndChapterInvalidChapterConstructor() {
+    @Test func testBookAndChapterInvalidChapterConstructor() {
         let chapterReference = ChapterReference("Genesis Fifty")
-        XCTAssertEqual(chapterReference.book, "Genesis")
-        XCTAssertEqual(chapterReference.chapterNumber, 0)
-        XCTAssertEqual(chapterReference.description, "Genesis 0")
-        XCTAssertTrue(chapterReference.isValid)
+        #expect(chapterReference.book == "Genesis")
+        #expect(chapterReference.chapterNumber == 0)
+        #expect(chapterReference.description == "Genesis 0")
+        #expect(chapterReference.isValid)
     }
     
-    func testBookAndChapterMissingChapterConstructor() {
+    @Test func testBookAndChapterMissingChapterConstructor() {
         let chapterReference = ChapterReference("Genesis")
-        XCTAssertEqual(chapterReference.book, "Genesis")
-        XCTAssertEqual(chapterReference.chapterNumber, 0)
-        XCTAssertEqual(chapterReference.description, "Genesis 0")
-        XCTAssertTrue(chapterReference.isValid)
+        #expect(chapterReference.book == "Genesis")
+        #expect(chapterReference.chapterNumber == 0)
+        #expect(chapterReference.description == "Genesis 0")
+        #expect(chapterReference.isValid)
     }
     
-    func testBookAndChapterBookStartsWithNumberMissingChapter() {
+    @Test func testBookAndChapterBookStartsWithNumberMissingChapter() {
         let chapterReference = ChapterReference("2 John")
-        XCTAssertEqual(chapterReference.book, "2 John")
-        XCTAssertEqual(chapterReference.chapterNumber, 0)
-        XCTAssertEqual(chapterReference.description, "2 John 0")
-        XCTAssertTrue(chapterReference.isValid)
+        #expect(chapterReference.book == "2 John")
+        #expect(chapterReference.chapterNumber == 0)
+        #expect(chapterReference.description == "2 John 0")
+        #expect(chapterReference.isValid)
     }
     
-    func testBookAndChapterValidConstructor() {
+    @Test func testBookAndChapterValidConstructor() {
         let chapterReference = ChapterReference("Genesis 50")
-        XCTAssertEqual(chapterReference.book, "Genesis")
-        XCTAssertEqual(chapterReference.chapterNumber, 50)
-        XCTAssertEqual(chapterReference.description, "Genesis 50")
-        XCTAssertTrue(chapterReference.isValid)
+        #expect(chapterReference.book == "Genesis")
+        #expect(chapterReference.chapterNumber == 50)
+        #expect(chapterReference.description == "Genesis 50")
+        #expect(chapterReference.isValid)
     }
     
-    func testTwoParameterInvalidConstructor() {
+    @Test func testTwoParameterInvalidConstructor() {
         let chapterReference = ChapterReference(book: "", chapter: 0)
-        XCTAssertEqual(chapterReference.book, "")
-        XCTAssertEqual(chapterReference.chapterNumber, 0)
-        XCTAssertEqual(chapterReference.description, "")
-        XCTAssertFalse(chapterReference.isValid)
+        #expect(chapterReference.book == "")
+        #expect(chapterReference.chapterNumber == 0)
+        #expect(chapterReference.description == "")
+        #expect(!chapterReference.isValid)
     }
     
-    func testTwoParameterPsalm151Constructor() {
+    @Test func testTwoParameterPsalm151Constructor() {
         let chapterReference = ChapterReference(book: "Psalm 151", chapter: 1)
-        XCTAssertEqual(chapterReference.book, "Psalm")
-        XCTAssertEqual(chapterReference.chapterNumber, 151)
-        XCTAssertEqual(chapterReference.description, "Psalm 151")
-        XCTAssertTrue(chapterReference.isValid)
+        #expect(chapterReference.book == "Psalm")
+        #expect(chapterReference.chapterNumber == 151)
+        #expect(chapterReference.description == "Psalm 151")
+        #expect(chapterReference.isValid)
     }
     
-    func testTwoParameterValidConstructor() {
+    @Test func testTwoParameterValidConstructor() {
         let chapterReference = ChapterReference(book: "Genesis", chapter: 50)
-        XCTAssertEqual(chapterReference.book, "Genesis")
-        XCTAssertEqual(chapterReference.chapterNumber, 50)
-        XCTAssertEqual(chapterReference.description, "Genesis 50")
-        XCTAssertTrue(chapterReference.isValid)
+        #expect(chapterReference.book == "Genesis")
+        #expect(chapterReference.chapterNumber == 50)
+        #expect(chapterReference.description == "Genesis 50")
+        #expect(chapterReference.isValid)
     }
 }

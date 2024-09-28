@@ -5,25 +5,25 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class PassageReferenceTests: XCTestCase {
+struct PassageReferenceTests {
     
-    func testInvalid() {
+    @Test func testInvalid() {
         let passageReference = PassageReference()
-        XCTAssertFalse(passageReference.chapterReference.isValid)
-        XCTAssertEqual(passageReference.display, "")
-        XCTAssertEqual(passageReference.highlightedVerses.count, 0)
-        XCTAssertFalse(passageReference.isValid)
+        #expect(!passageReference.chapterReference.isValid)
+        #expect(passageReference.display == "")
+        #expect(passageReference.highlightedVerses.count == 0)
+        #expect(!passageReference.isValid)
     }
     
-    func testValid() {
+    @Test func testValid() {
         var passageReference = PassageReference()
         passageReference.chapterReference = ChapterReference("Psalm 151")
-        XCTAssertTrue(passageReference.chapterReference.isValid)
-        XCTAssertEqual(passageReference.display, "")
-        XCTAssertEqual(passageReference.highlightedVerses.count, 0)
-        XCTAssertTrue(passageReference.isValid)
+        #expect(passageReference.chapterReference.isValid)
+        #expect(passageReference.display == "")
+        #expect(passageReference.highlightedVerses.count == 0)
+        #expect(passageReference.isValid)
     }
 }

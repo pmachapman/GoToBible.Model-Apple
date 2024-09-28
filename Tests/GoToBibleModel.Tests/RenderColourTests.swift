@@ -5,15 +5,15 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class RenderColourTests: XCTestCase {
+struct RenderColourTests {
     
-    func testEmpty() {
+    @Test func testEmpty() {
         let renderColour = RenderColour()
-        XCTAssertEqual(renderColour.r, 0)
-        XCTAssertEqual(renderColour.g, 0)
-        XCTAssertEqual(renderColour.b, 0)
+        #expect(renderColour.r == 0)
+        #expect(renderColour.g == 0)
+        #expect(renderColour.b == 0)
     }
 }

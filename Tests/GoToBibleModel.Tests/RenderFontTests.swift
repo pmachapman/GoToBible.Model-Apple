@@ -5,18 +5,18 @@
 //  Created by Peter Chapman on 17/08/21.
 //
 
-import XCTest
+import Testing
 @testable import GoToBibleModel
 
-final class RenderFontTests: XCTestCase {
+struct RenderFontTests {
     
-    func testEmpty() {
+    @Test func testEmpty() {
         let renderFont = RenderFont()
-        XCTAssertFalse(renderFont.bold)
-        XCTAssertEqual(renderFont.familyName, "")
-        XCTAssertFalse(renderFont.italic)
-        XCTAssertEqual(renderFont.sizeInPoints, 0)
-        XCTAssertFalse(renderFont.strikeout)
-        XCTAssertFalse(renderFont.underline)
+        #expect(!renderFont.bold)
+        #expect(renderFont.familyName == "")
+        #expect(!renderFont.italic)
+        #expect(renderFont.sizeInPoints == 0)
+        #expect(!renderFont.strikeout)
+        #expect(!renderFont.underline)
     }
 }
