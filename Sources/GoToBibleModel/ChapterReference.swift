@@ -42,7 +42,7 @@ public struct ChapterReference: Codable, CustomStringConvertible, Equatable {
                 if let firstColonIndex = chapter.firstIndex(of: ":") {
                     chapter = chapter[..<firstColonIndex]
                 }
-
+                
                 let chapterNumber = Int(chapter)
                 if chapterNumber != nil {
                     self.chapterNumber = chapterNumber ?? 0

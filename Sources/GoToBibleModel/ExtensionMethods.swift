@@ -252,7 +252,7 @@ public extension RenderingParameters {
         {
             css.append("font-weight:normal;")
         }
-
+        
         if self.font.italic
         {
             css.append("font-style:italic;")
@@ -261,7 +261,7 @@ public extension RenderingParameters {
         {
             css.append("font-style:normal;")
         }
-
+        
         if self.font.strikeout && self.font.underline
         {
             css.append("text-decoration:underline line-through;")
@@ -278,14 +278,14 @@ public extension RenderingParameters {
         {
             css.append("text-decoration:none;")
         }
-
+        
         css.append("font-size:\(self.font.sizeInPoints)pt;");
         css.append("font-family:\(self.font.familyName)}");
         if self.font.italic
         {
             css.append("em{font-style:normal}");
         }
-
+        
         css.append("sup{font-size:\(self.font.sizeInPoints * 0.75)pt;font-weight:bold}.sup{font-weight:bold}")
         css.append(".occurrence{vertical-align:super;font-size:smaller}")
         css.append(".copyright{border-top:1px solid \(self.foregroundColour.toHtml());font-size:\(String(format: "%.2f", self.font.sizeInPoints * 0.75))pt}")

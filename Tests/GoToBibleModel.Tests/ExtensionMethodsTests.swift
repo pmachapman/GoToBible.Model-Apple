@@ -64,7 +64,7 @@ struct ExtensionMethodsTests {
         renderingParameters.primaryTranslation = "ESV"
         #expect(renderingParameters.asUrl() == URL(string: "https://goto.bible/1.John.1_3~6-7/ESV"))
     }
-
+    
     @Test func testAsUrl_RenderingParametersOneTranslationInterlinearMode() {
         var renderingParameters = RenderingParameters()
         renderingParameters.passageReference.display = "1 John 1:3,6-7"

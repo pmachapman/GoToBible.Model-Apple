@@ -39,7 +39,7 @@ public struct ApparatusRenderingParameters: Codable, Equatable {
     /// Gets or sets the occurrence marker.
     /// - Remark: This should be HTML code or an HTML entity. You should substitute the occurrence number with the marker %OCCURRENCE% otherwise, the marker will be shown unmodified (not ideal!). The default value uses the occurrence class to show plain text in superscript.
     public var occurrenceMarker: String = "<span class=\"occurrence\">%OCCURRENCE%</span>"
-
+    
     /// Gets or sets the omission marker.
     /// - Remark: This should be HTML code or an HTML entity. You can substitute the omitted phrase with the marker %OMITTED_PHRASE% otherwise, the marker will be shown unmodified.
     public var omissionMarker: String = "<em>\(SpreadsheetRenderingParameters.omit)</em>"

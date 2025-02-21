@@ -38,7 +38,7 @@ public struct SpreadsheetRenderingParameters: Codable, Equatable {
     /// Gets or sets a value indicating whether this `RenderingParameters` is in debugging mode.
     /// - Remark: Debug mode will display extra developer information. It is not suitable for general use.
     public var isDebug: Bool = false
-
+    
     /// Gets or sets the omission marker.
     /// - Remark: This should be plain text.
     public var omissionMarker: String = omit

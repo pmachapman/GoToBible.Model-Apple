@@ -1,6 +1,6 @@
 //
 //  RenderedPassage.swift
-//  
+//
 //
 //  Created by Peter Chapman on 17/08/21.
 //
